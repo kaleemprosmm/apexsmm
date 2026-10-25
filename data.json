@@ -1,0 +1,287 @@
+{
+  "settings": {
+    "siteName": "ApexSMM - Automated Social Media Marketing Panel",
+    "currency": "PKR",
+    "currencySymbol": "Rs.",
+    "exchangeRateUsdToPkr": 280,
+    "provider": {
+      "mode": "live",
+      "name": "Smart Simulation Provider (Instant Auto-Delivery)",
+      "apiUrl": "https://pakistanpanels.org/api/v2",
+      "apiKey": "ve2SxHDK4JGEkZd9ANN6Sf6uo2xUMww7",
+      "autoOrder": true,
+      "balance": 2.11933202
+    },
+    "paymentDetails": {
+      "easypaisa": {
+        "title": "Easypaisa Account",
+        "number": "03109792960",
+        "name": "Kaleemullah"
+      },
+      "jazzcash": {
+        "title": "Easypaisa / Microfinance",
+        "number": "03109792960",
+        "name": "Kaleemullah"
+      },
+      "bank": {
+        "title": "UBL (United Bank Limited)",
+        "number": "1098269477546",
+        "name": "Kaleemullah",
+        "iban": "PK76UNIL0109000269477546"
+      },
+      "usdt": {
+        "title": "USDT (TRC-20)",
+        "address": "TYDzsxdczEfxxxxxxSAMPLEADDRESSxxxxxx"
+      }
+    }
+  },
+  "users": [
+    {
+      "id": "usr_admin",
+      "username": "kaleempro",
+      "email": "kaleempro@apex-smm.com",
+      "passwordHash": "$2b$10$KJ64pBpUwWkQx1gp9TFwP.m/lhgsJ/.LML.3x2jiy/557QtlEipvy",
+      "role": "admin",
+      "balance": 100000,
+      "spent": 4.43,
+      "createdAt": "2026-10-24T07:01:35.249Z"
+    },
+    {
+      "id": "usr_demo",
+      "username": "salman",
+      "email": "salman@example.com",
+      "passwordHash": "$2b$10$kwcFqn3Um72stw.jaNWuSuHEtlyehdKPBOQKfeNqJtnRzN5jMHote",
+      "role": "user",
+      "balance": 0,
+      "spent": 0,
+      "createdAt": "2026-10-24T07:01:35.333Z"
+    },
+    {
+      "id": "usr_1792825687545",
+      "username": "kaleem khan",
+      "email": "kaleemtiktok5500@gmail.com",
+      "passwordHash": "$2b$10$EUG8CDxvbeV/vZLZKOYf7OF0FHgJbuod4p3tv7eILYSwIeBSot4WG",
+      "role": "user",
+      "balance": 0,
+      "spent": 0,
+      "createdAt": "2026-10-24T07:08:07.651Z"
+    },
+    {
+      "id": "usr_1792912176541",
+      "username": "testuser_1792912176454",
+      "email": "test_1792912176454@mail.com",
+      "passwordHash": "$2b$10$.tzYeaW3C9nHXkZMaedj.eWNFcB6MSTxSzY9xCuMsrTZCE4XkSMAG",
+      "role": "user",
+      "balance": 0,
+      "spent": 0,
+      "createdAt": "2026-10-25T07:09:36.635Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat_tiktok",
+      "name": "TikTok Services (Ultra Fast)",
+      "icon": "fab fa-tiktok"
+    },
+    {
+      "id": "cat_fb",
+      "name": "Facebook Growth & Monetization",
+      "icon": "fab fa-facebook"
+    },
+    {
+      "id": "cat_insta",
+      "name": "Instagram Followers & Likes",
+      "icon": "fab fa-instagram"
+    },
+    {
+      "id": "cat_yt",
+      "name": "YouTube Watchtime & Views",
+      "icon": "fab fa-youtube"
+    }
+  ],
+  "services": [
+    {
+      "id": "srv_101",
+      "categoryId": "cat_tiktok",
+      "name": "TikTok Video Views [Instant Start | Day 100k 🚀]",
+      "rate": 5,
+      "min": 1000,
+      "max": 1000000,
+      "providerServiceId": "1398",
+      "description": "Instant start. Paste video link. 100% safe for monetization and FYP algorithm.",
+      "status": "active"
+    },
+    {
+      "id": "srv_102",
+      "categoryId": "cat_tiktok",
+      "name": "TikTok Video Views [Max Unlimited | Day 10M Cheap]",
+      "rate": 8,
+      "min": 1000,
+      "max": 50000,
+      "providerServiceId": "807",
+      "description": "Real looking profiles with avatars and bio. Non-drop guaranteed.",
+      "status": "active"
+    },
+    {
+      "id": "srv_103",
+      "categoryId": "cat_tiktok",
+      "name": "TikTok Likes ❤️ [High Quality | Instant Start 5 Min]",
+      "rate": 45,
+      "min": 100,
+      "max": 10000,
+      "providerServiceId": "1279",
+      "description": "Helps get your video pushed onto the For You Page (FYP).",
+      "status": "active"
+    },
+    {
+      "id": "srv_201",
+      "categoryId": "cat_fb",
+      "name": "Facebook Page / Profile Followers [HQ Global Name]",
+      "rate": 44.3,
+      "min": 100,
+      "max": 10000,
+      "providerServiceId": "1508",
+      "description": "Works on both Facebook Pages and Profiles. High retention.",
+      "status": "active"
+    },
+    {
+      "id": "srv_202",
+      "categoryId": "cat_fb",
+      "name": "Facebook Followers [All Type Profile / Page | 10k/day]",
+      "rate": 51,
+      "min": 100,
+      "max": 1000000,
+      "providerServiceId": "451",
+      "description": "Fast video and reels views delivery.",
+      "status": "active"
+    },
+    {
+      "id": "srv_203",
+      "categoryId": "cat_fb",
+      "name": "Facebook Reels / Video Views [Non-Drop | Lifetime]",
+      "rate": 9.56,
+      "min": 1000,
+      "max": 5000,
+      "providerServiceId": "341",
+      "description": "Organic post likes to increase post engagement.",
+      "status": "active"
+    },
+    {
+      "id": "srv_301",
+      "categoryId": "cat_insta",
+      "name": "Instagram Followers [Cheapest Instant]",
+      "rate": 72.1,
+      "min": 100,
+      "max": 25000,
+      "providerServiceId": "2989",
+      "description": "Speed: 5k-10k per day. Quality: Mixed Global.",
+      "status": "active"
+    },
+    {
+      "id": "srv_401",
+      "categoryId": "cat_yt",
+      "name": "\tInstagram Likes [Real Accounts]",
+      "rate": 18.4,
+      "min": 100,
+      "max": 100000,
+      "providerServiceId": "9986",
+      "description": "Views with 3-5 minutes average watch duration. Safe for Adsense.",
+      "status": "active"
+    },
+    {
+      "id": "srv_1792832027387",
+      "categoryId": "cat_tiktok",
+      "name": "TikTok Followers [100% Real Accounts | Drop 0-5%]",
+      "rate": 171.3,
+      "min": 100,
+      "max": 100000,
+      "providerServiceId": "1",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "id": "srv_1792832072481",
+      "categoryId": "cat_tiktok",
+      "name": "TikTok Followers [Real Accounts + Videos | 1 Min Speed]",
+      "rate": 292.5,
+      "min": 100,
+      "max": 100000,
+      "providerServiceId": "1",
+      "description": "",
+      "status": "active"
+    },
+    {
+      "id": "srv_1792832276205",
+      "categoryId": "cat_fb",
+      "name": "Facebook Post Likes [✅ Non-Drop | Lifetime Guarantee]",
+      "rate": 82.75,
+      "min": 100,
+      "max": 100000,
+      "providerServiceId": "1",
+      "description": "",
+      "status": "active"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ord_1792834235075",
+      "userId": "usr_admin",
+      "username": "admin",
+      "serviceId": "srv_201",
+      "serviceName": "Facebook Page / Profile Followers [HQ Global Name]",
+      "link": "https://www.facebook.com/share/19feZvS77E/",
+      "quantity": 100,
+      "charge": 4.43,
+      "status": "Completed",
+      "providerOrderId": "1661130",
+      "providerError": null,
+      "startCount": 8668,
+      "remains": 0,
+      "createdAt": "2026-10-24T09:30:35.075Z"
+    },
+    {
+      "id": "ord_1792825834683",
+      "userId": "usr_1792825687545",
+      "username": "kaleem khan",
+      "serviceId": "srv_203",
+      "serviceName": "Facebook Post Reactions / Likes [Love, Care, Like] 👍",
+      "link": "https://www.facebook.com/share/r/1JmciN7SvC/",
+      "quantity": 500,
+      "charge": 70,
+      "status": "Completed",
+      "providerOrderId": "SIM-80882",
+      "providerError": null,
+      "startCount": 328,
+      "remains": 0,
+      "createdAt": "2026-10-24T07:10:34.683Z"
+    },
+    {
+      "id": "ord_1001",
+      "userId": "usr_demo",
+      "username": "salman",
+      "serviceId": "srv_101",
+      "serviceName": "TikTok Video Views - Super Fast [Instant Start] ⚡",
+      "link": "https://www.tiktok.com/@sample/video/7123456789",
+      "quantity": 10000,
+      "charge": 250,
+      "status": "Completed",
+      "providerOrderId": "SIM-98213",
+      "startCount": 154,
+      "remains": 0,
+      "createdAt": "2026-10-24T02:01:35.333Z"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "txn_5001",
+      "userId": "usr_demo",
+      "username": "salman",
+      "method": "JazzCash",
+      "amount": 5250,
+      "status": "Approved",
+      "trxId": "JC9876543210",
+      "proof": null,
+      "createdAt": "2026-10-24T01:01:35.333Z"
+    }
+  ]
+}
