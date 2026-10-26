@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - ApexSMM</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ApexSMM">
+  <link rel="apple-touch-icon" href="/img/icon-192.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-[#080c15] text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Top Navigation Bar -->
+  <header class="glass-panel border-b border-slate-800 sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-md shadow-indigo-600/30">
+          <i class="fa-solid fa-bolt text-white text-base"></i>
+        </div>
+        <div>
+          <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">ApexSMM</span>
+          <span class="text-[9px] font-semibold text-indigo-400 block tracking-widest uppercase">Dashboard</span>
+        </div>
+      </a>
+
+      <!-- Right Profile & Balance -->
+      <div class="flex items-center gap-4">
+        <!-- Balance Badge -->
+        <div class="flex items-center gap-2 px-4 py-1.5 rounded-xl bg-indigo-950/70 border border-indigo-500/30 shadow-inner">
+          <i class="fa-solid fa-wallet text-indigo-400"></i>
+          <div>
+            <div class="text-[10px] uppercase font-bold text-slate-400 leading-none">Your Balance</div>
+            <div id="userBalanceText" class="text-sm font-extrabold text-emerald-400 font-mono">Rs. 0.00</div>
+          </div>
+          <button onclick="switchTab('add-funds')" class="ml-2 px-2.5 py-1 rounded-lg text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 transition-all shadow">
+            + Add Funds
+          </button>
+        </div>
+
+        <!-- Admin Shortcut (hidden if not admin) -->
+        <a id="adminLinkBtn" href="/admin.html" class="hidden px-3 py-1.5 rounded-lg text-xs font-bold text-purple-300 bg-purple-950/60 border border-purple-800/60 hover:bg-purple-900/60 transition-all">
+          <i class="fa-solid fa-shield-halved mr-1"></i> Admin Panel
+        </a>
+
+        <!-- User Dropdown / Logout -->
+        <div class="flex items-center gap-3 border-l border-slate-800 pl-4">
+          <div class="text-right hidden sm:block">
+            <div id="navUsername" class="text-xs font-bold text-white">Loading...</div>
+            <div class="text-[10px] text-slate-400">Client Account</div>
+          </div>
+          <button onclick="handleLogout()" title="Logout" class="w-9 h-9 rounded-xl bg-slate-800/80 hover:bg-rose-900/40 hover:text-rose-400 border border-slate-700/60 flex items-center justify-center text-slate-300 transition-all">
+            <i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full flex flex-col md:flex-row gap-8">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 flex-shrink-0">
+      <div class="glass-card rounded-2xl p-3 border border-slate-800 space-y-1 sticky top-24">
+        <button onclick="switchTab('new-order')" id="tabBtn-new-order" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 transition-all">
+          <i class="fa-solid fa-cart-plus w-5"></i>
+          <span>New Order</span>
+        </button>
+        <button onclick="switchTab('order-history')" id="tabBtn-order-history" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+          <i class="fa-solid fa-clock-rotate-left w-5"></i>
+          <span>Order History</span>
+        </button>
+        <button onclick="switchTab('add-funds')" id="tabBtn-add-funds" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+          <i class="fa-solid fa-money-bill-transfer w-5"></i>
+          <span>Add Funds</span>
+        </button>
+        <button onclick="switchTab('services-list')" id="tabBtn-services-list" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+          <i class="fa-solid fa-list-check w-5"></i>
+          <span>Services & Rates</span>
+        </button>
+        <button onclick="switchTab('api-doc')" id="tabBtn-api-doc" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+          <i class="fa-solid fa-code w-5"></i>
+          <span>API Reseller Docs</span>
+        </button>
+      </div>
+
+      <!-- Quick Stats Card in Sidebar -->
+      <div class="glass-card rounded-2xl p-5 border border-slate-800 mt-4 space-y-3">
+        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Account Summary</div>
+        <div class="flex justify-between items-center text-sm">
+          <span class="text-slate-400">Total Spent:</span>
+          <span id="userSpentText" class="font-bold text-white font-mono">Rs. 0.00</span>
+        </div>
+        <div class="flex justify-between items-center text-sm">
+          <span class="text-slate-400">Total Orders:</span>
+          <span id="userTotalOrders" class="font-bold text-white font-mono">0</span>
+        </div>
+        <div class="pt-2 border-t border-slate-800">
+          <div class="text-[11px] text-emerald-400 flex items-center gap-1.5 font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Provider API Sync: Online & Fast
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+      
+      <!-- ==================== TAB 1: NEW ORDER ==================== -->
+      <section id="tab-new-order" class="space-y-6">
+        <!-- Platform Quick Filters -->
+        <div class="flex flex-wrap gap-2.5 pb-2">
+          <button onclick="filterByPlatform('all')" class="platform-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white transition-all">
+            All Platforms
+          </button>
+          <button onclick="filterByPlatform('tiktok')" class="platform-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-all">
+            <i class="fab fa-tiktok mr-1.5 text-rose-400"></i> TikTok
+          </button>
+          <button onclick="filterByPlatform('fb')" class="platform-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-all">
+            <i class="fab fa-facebook mr-1.5 text-blue-500"></i> Facebook
+          </button>
+          <button onclick="filterByPlatform('insta')" class="platform-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-all">
+            <i class="fab fa-instagram mr-1.5 text-pink-500"></i> Instagram
+          </button>
+          <button onclick="filterByPlatform('yt')" class="platform-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-all">
+            <i class="fab fa-youtube mr-1.5 text-red-500"></i> YouTube
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Order Form (2 Cols) -->
+          <div class="lg:col-span-2 glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl">
+            <h2 class="text-xl font-extrabold text-white mb-6 flex items-center gap-2.5">
+              <i class="fa-solid fa-cart-shopping text-indigo-400"></i> Place New Order
+            </h2>
+
+            <form id="orderForm" onsubmit="submitNewOrder(event)" class="space-y-5">
+              <!-- Category Selector -->
+              <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Category</label>
+                <div class="relative">
+                  <select id="orderCategory" onchange="onCategoryChange()" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-sm font-medium focus:outline-none focus:border-indigo-500 appearance-none">
+                    <!-- Dynamic -->
+                  </select>
+                  <i class="fa-solid fa-chevron-down absolute right-4 top-4 text-slate-500 pointer-events-none text-xs"></i>
+                </div>
+              </div>
+
+              <!-- Service Selector -->
+              <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Service</label>
+                <div class="relative">
+                  <select id="orderService" onchange="onServiceChange()" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-sm font-medium focus:outline-none focus:border-indigo-500 appearance-none">
+                    <!-- Dynamic -->
+                  </select>
+                  <i class="fa-solid fa-chevron-down absolute right-4 top-4 text-slate-500 pointer-events-none text-xs"></i>
+                </div>
+              </div>
+
+              <!-- Link Input -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">Target Link / URL</label>
+                  <span id="linkHelper" class="text-[11px] text-slate-400">e.g. Video, Profile or Page link</span>
+                </div>
+                <div class="relative">
+                  <i class="fa-solid fa-link absolute left-4 top-3.5 text-slate-500 text-sm"></i>
+                  <input type="url" id="orderLink" required placeholder="https://www.tiktok.com/@username/video/..." class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500 font-mono">
+                </div>
+              </div>
+
+              <!-- Quantity Input -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider">Quantity</label>
+                  <span id="minMaxIndicator" class="text-xs text-indigo-400 font-semibold font-mono">Min: 100 - Max: 50,000</span>
+                </div>
+                <div class="relative">
+                  <i class="fa-solid fa-hashtag absolute left-4 top-3.5 text-slate-500 text-sm"></i>
+                  <input type="number" id="orderQuantity" required oninput="calculateCharge()" placeholder="1000" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500 font-mono">
+                </div>
+                <!-- Quick Amount Buttons -->
+                <div class="flex gap-2 mt-2">
+                  <button type="button" onclick="setQuantity(1000)" class="px-2.5 py-1 rounded-lg text-xs bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">+1,000</button>
+                  <button type="button" onclick="setQuantity(5000)" class="px-2.5 py-1 rounded-lg text-xs bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">+5,000</button>
+                  <button type="button" onclick="setQuantity(10000)" class="px-2.5 py-1 rounded-lg text-xs bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">+10,000</button>
+                  <button type="button" onclick="setQuantity(50000)" class="px-2.5 py-1 rounded-lg text-xs bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700">+50,000</button>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" id="submitOrderBtn" class="w-full py-3.5 rounded-xl text-base font-extrabold text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 hover:opacity-95 shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i> Submit Order & Auto Start
+              </button>
+            </form>
+          </div>
+
+          <!-- Order Summary & Service Details (1 Col) -->
+          <div class="space-y-6">
+            <!-- Price Calculation Card -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 shadow-xl">
+              <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Order Calculation</div>
+              
+              <div class="space-y-3 text-sm">
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-400">Rate per 1,000:</span>
+                  <span id="calcRate" class="font-bold text-white font-mono">Rs. 0.00</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-400">Order Quantity:</span>
+                  <span id="calcQuantity" class="font-bold text-white font-mono">0</span>
+                </div>
+                <div class="pt-3 border-t border-slate-800 flex justify-between items-baseline">
+                  <span class="text-sm font-semibold text-slate-300">Total Charge:</span>
+                  <span id="calcTotalCharge" class="text-2xl font-extrabold text-emerald-400 font-mono">Rs. 0.00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service Description / Specifications -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800">
+              <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-indigo-400"></i> Service Specifications
+              </div>
+              <p id="serviceDescription" class="text-xs text-slate-300 leading-relaxed">
+                Select a service to view speed, quality, and guarantee information.
+              </p>
+              
+              <div class="mt-4 pt-3 border-t border-slate-800 space-y-2 text-xs">
+                <div class="flex items-center gap-2 text-slate-400">
+                  <i class="fa-solid fa-bolt text-amber-400 text-xs w-4"></i> Start: Instant (0 - 10 mins)
+                </div>
+                <div class="flex items-center gap-2 text-slate-400">
+                  <i class="fa-solid fa-shield text-emerald-400 text-xs w-4"></i> 100% Safe For Accounts & Algorithms
+                </div>
+                <div class="flex items-center gap-2 text-slate-400">
+                  <i class="fa-solid fa-rotate text-cyan-400 text-xs w-4"></i> Non-Drop & Refill Supported
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: ORDER HISTORY ==================== -->
+      <section id="tab-order-history" class="space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-extrabold text-white">Order Logs & Live Tracking</h2>
+            <p class="text-xs text-slate-400">Track delivery status synchronized directly from provider servers.</p>
+          </div>
+          <button onclick="loadUserOrders()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-300 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-arrows-rotate text-indigo-400"></i> Refresh Statuses
+          </button>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden border border-slate-800">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-900/90 uppercase tracking-wider text-slate-400 border-b border-slate-800">
+                <tr>
+                  <th class="py-3.5 px-4">Order ID</th>
+                  <th class="py-3.5 px-4">Service</th>
+                  <th class="py-3.5 px-4">Target Link</th>
+                  <th class="py-3.5 px-4">Quantity</th>
+                  <th class="py-3.5 px-4">Charge</th>
+                  <th class="py-3.5 px-4">Start / Remains</th>
+                  <th class="py-3.5 px-4">Status</th>
+                  <th class="py-3.5 px-4 text-right">Date</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody" class="divide-y divide-slate-800/60 font-medium">
+                <tr><td colspan="8" class="py-8 text-center text-slate-500">Loading orders...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: ADD FUNDS ==================== -->
+      <section id="tab-add-funds" class="space-y-6 hidden">
+        <div>
+          <h2 class="text-xl font-extrabold text-white">Add Balance (Funds)</h2>
+          <p class="text-xs text-slate-400">Add balance instantly using Easypaisa, JazzCash, Bank Transfer or Crypto.</p>
+        </div>
+
+        <!-- Payment Accounts Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="paymentAccountsGrid">
+          <!-- Dynamic payment cards -->
+        </div>
+
+        <!-- Submit Deposit Form -->
+        <div class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 max-w-2xl">
+          <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-receipt text-indigo-400"></i> Submit Payment Details
+          </h3>
+          <p class="text-xs text-slate-400 mb-6">After sending money to any of the accounts above, enter your Transaction ID (TID) below for verification.</p>
+
+          <form id="depositForm" onsubmit="submitDeposit(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-400 uppercase mb-1.5">Payment Method</label>
+              <select id="depositMethod" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500">
+                <option value="Easypaisa">Easypaisa</option>
+                <option value="JazzCash">JazzCash</option>
+                <option value="Bank Transfer">Bank Transfer (Meezan / Alfalah)</option>
+                <option value="USDT (TRC-20)">USDT (TRC-20 Crypto)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-400 uppercase mb-1.5">Amount Sent (PKR)</label>
+              <input type="number" id="depositAmount" min="50" required placeholder="500" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500 font-mono">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-400 uppercase mb-1.5">Transaction ID (TID / Trx ID / Hash)</label>
+              <input type="text" id="depositTrxId" required placeholder="e.g. 19283746501" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500 font-mono">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-400 uppercase mb-1.5">Payment Screenshot / Receipt (Optional)</label>
+              <input type="file" id="depositReceipt" accept="image/*" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500 cursor-pointer">
+            </div>
+
+            <button type="submit" class="w-full py-3 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-lg shadow-emerald-600/30 transition-all">
+              Submit Deposit Request
+            </button>
+          </form>
+        </div>
+
+        <!-- Previous Deposits -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800">
+          <h3 class="text-sm font-bold text-white mb-4">My Deposit History</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-900/90 uppercase tracking-wider text-slate-400 border-b border-slate-800">
+                <tr>
+                  <th class="py-3 px-4">Transaction ID</th>
+                  <th class="py-3 px-4">Method</th>
+                  <th class="py-3 px-4">Amount</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4 text-right">Date</th>
+                </tr>
+              </thead>
+              <tbody id="depositHistoryBody" class="divide-y divide-slate-800/60 font-medium">
+                <!-- Dynamic -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 4: SERVICES LIST ==================== -->
+      <section id="tab-services-list" class="space-y-6 hidden">
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-extrabold text-white">All Platform Services & Rates</h2>
+        </div>
+        <div class="glass-card rounded-2xl overflow-hidden border border-slate-800">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-900/90 uppercase tracking-wider text-slate-400 border-b border-slate-800">
+                <tr>
+                  <th class="py-3.5 px-4">ID</th>
+                  <th class="py-3.5 px-4">Service Name</th>
+                  <th class="py-3.5 px-4">Price / 1000</th>
+                  <th class="py-3.5 px-4">Min / Max</th>
+                  <th class="py-3.5 px-4 text-right">Order</th>
+                </tr>
+              </thead>
+              <tbody id="dashboardServicesTableBody" class="divide-y divide-slate-800/60 font-medium">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 5: API DOCUMENTATION ==================== -->
+      <section id="tab-api-doc" class="space-y-6 hidden">
+        <div class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 space-y-6">
+          <div>
+            <h2 class="text-xl font-extrabold text-white flex items-center gap-2">
+              <i class="fa-solid fa-code text-indigo-400"></i> Reseller API Documentation (v2)
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">Connect your own website, Discord bot, or Telegram bot to place orders automatically.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+            <div class="text-xs text-slate-400 font-semibold mb-1">API Endpoint:</div>
+            <code class="text-indigo-300 font-mono text-sm block">POST http://localhost:3000/api/v2</code>
+          </div>
+
+          <div>
+            <h4 class="text-sm font-bold text-white mb-2">Your API Key:</h4>
+            <div class="flex items-center gap-2 max-w-md">
+              <input type="text" id="userApiKey" readonly class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs font-mono text-slate-300">
+              <button onclick="copyToClipboard(document.getElementById('userApiKey').value)" class="px-3 py-2 rounded-lg bg-indigo-600 text-xs font-bold hover:bg-indigo-500">Copy</button>
+            </div>
+          </div>
+
+          <div class="space-y-4 text-xs text-slate-300">
+            <h4 class="text-sm font-bold text-white">Supported Actions:</h4>
+            
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+              <div class="font-bold text-indigo-400">1. Place Order (Action: add)</div>
+              <pre class="bg-black/40 p-3 rounded-lg overflow-x-auto text-[11px] font-mono text-slate-300">POST /api/v2
+key=YOUR_API_KEY&action=add&service=srv_101&link=https://tiktok.com/@user/video/1&quantity=1000</pre>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+              <div class="font-bold text-indigo-400">2. Order Status (Action: status)</div>
+              <pre class="bg-black/40 p-3 rounded-lg overflow-x-auto text-[11px] font-mono text-slate-300">POST /api/v2
+key=YOUR_API_KEY&action=status&order=ord_1001</pre>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2">
+              <div class="font-bold text-indigo-400">3. Services List (Action: services)</div>
+              <pre class="bg-black/40 p-3 rounded-lg overflow-x-auto text-[11px] font-mono text-slate-300">POST /api/v2
+key=YOUR_API_KEY&action=services</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(()=>{});
+    }
+  </script>
+</body>
+</html>

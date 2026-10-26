@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexSMM - Fully Automated Social Media Marketing Panel</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ApexSMM">
+  <link rel="apple-touch-icon" href="/img/icon-192.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-[#080c15] text-slate-100 min-h-screen relative flex flex-col justify-between">
+
+  <!-- Ambient Glowing Background Orbs -->
+  <div class="bg-orb w-96 h-96 bg-indigo-600 top-0 left-10"></div>
+  <div class="bg-orb w-96 h-96 bg-purple-600 top-40 right-10"></div>
+  <div class="bg-orb w-80 h-80 bg-cyan-600 bottom-10 left-1/3"></div>
+
+  <!-- Navbar -->
+  <header class="relative z-20 border-b border-slate-800/80 glass-panel sticky top-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+          <i class="fa-solid fa-bolt-lightning text-white text-xl"></i>
+        </div>
+        <div>
+          <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent">ApexSMM</span>
+          <span class="text-[10px] font-semibold text-cyan-400 block tracking-widest uppercase">Auto Growth Engine</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#services" class="hover:text-indigo-400 transition-colors">Services & Rates</a>
+        <a href="#features" class="hover:text-indigo-400 transition-colors">Why Us</a>
+        <a href="#how" class="hover:text-indigo-400 transition-colors">How It Works</a>
+        <a href="/dashboard.html" class="hover:text-indigo-400 transition-colors">Client Portal</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="installApexApp()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all">
+          <i class="fa-brands fa-android text-emerald-400"></i>
+          <span>Install APK</span>
+        </button>
+        <button onclick="openAuthModal('login')" class="px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-200 hover:text-white hover:bg-slate-800/80 transition-all border border-slate-700/60">
+          Sign In
+        </button>
+        <button onclick="openAuthModal('register')" class="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-600/30 transition-all">
+          Get Started <i class="fa-solid fa-arrow-right ml-1"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="relative z-10 flex-grow">
+    <section class="max-w-6xl mx-auto px-4 pt-16 pb-20 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-950/80 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-6 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span>100% Automated Instant Provider API Active</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+        Grow Your Social Media On <br>
+        <span class="bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400 bg-clip-text text-transparent">Complete Auto-Pilot</span>
+      </h1>
+
+      <p class="max-w-2xl mx-auto text-lg text-slate-300 mb-10 leading-relaxed">
+        The most reliable, high-speed SMM panel for <strong>TikTok, Facebook, Instagram & YouTube</strong>. Instant start, wholesale rates, and automated API fulfillment.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
+        <button onclick="openAuthModal('register')" class="px-8 py-4 rounded-xl text-base font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-xl shadow-indigo-600/30 hover:scale-105 transition-all">
+          <i class="fa-solid fa-rocket mr-2"></i> Launch Dashboard Now
+        </button>
+        <button onclick="installApexApp()" class="px-7 py-4 rounded-xl text-base font-semibold text-emerald-300 bg-emerald-950/60 border border-emerald-500/40 hover:bg-emerald-900/60 transition-all shadow-lg shadow-emerald-500/10">
+          <i class="fa-brands fa-android text-emerald-400 mr-2 text-lg"></i> Install Mobile App (APK)
+        </button>
+        <a href="#services" class="px-7 py-4 rounded-xl text-base font-semibold text-slate-200 glass-card hover:bg-slate-800 transition-all">
+          <i class="fa-solid fa-list-check mr-2 text-indigo-400"></i> View Pricing & Services
+        </a>
+      </div>
+
+      <!-- Platform Pills -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto">
+        <div class="p-5 rounded-2xl glass-card text-center">
+          <i class="fab fa-tiktok text-4xl text-rose-400 mb-3"></i>
+          <h4 class="font-bold text-white">TikTok</h4>
+          <p class="text-xs text-slate-400 mt-1">Views, Followers & Likes from Rs. 25/k</p>
+        </div>
+        <div class="p-5 rounded-2xl glass-card text-center">
+          <i class="fab fa-facebook text-4xl text-blue-500 mb-3"></i>
+          <h4 class="font-bold text-white">Facebook</h4>
+          <p class="text-xs text-slate-400 mt-1">Page Followers & 60k Watchtime</p>
+        </div>
+        <div class="p-5 rounded-2xl glass-card text-center">
+          <i class="fab fa-instagram text-4xl text-pink-500 mb-3"></i>
+          <h4 class="font-bold text-white">Instagram</h4>
+          <p class="text-xs text-slate-400 mt-1">HQ Followers & Reels Algorithm Boost</p>
+        </div>
+        <div class="p-5 rounded-2xl glass-card text-center">
+          <i class="fab fa-youtube text-4xl text-red-500 mb-3"></i>
+          <h4 class="font-bold text-white">YouTube</h4>
+          <p class="text-xs text-slate-400 mt-1">Subscribers & Monetization Views</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Table Section -->
+    <section id="services" class="max-w-6xl mx-auto px-4 py-16">
+      <div class="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Available Services & Live Rates</h2>
+          <p class="text-sm text-slate-400">All services are synchronized with wholesale provider APIs.</p>
+        </div>
+        <div class="relative w-full sm:w-72">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-500 text-sm"></i>
+          <input type="text" id="serviceSearch" onkeyup="filterServices()" placeholder="Search TikTok, FB, Views..." class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500">
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl overflow-hidden border border-slate-800">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm text-slate-300">
+            <thead class="bg-slate-900/90 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-4 px-6">ID</th>
+                <th class="py-4 px-6">Service Name</th>
+                <th class="py-4 px-6">Rate (Per 1000)</th>
+                <th class="py-4 px-6">Min / Max</th>
+                <th class="py-4 px-6">Speed</th>
+                <th class="py-4 px-6 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="servicesTableBody" class="divide-y divide-slate-800/60 font-medium">
+              <!-- Dynamically populated via JS -->
+              <tr>
+                <td colspan="6" class="py-8 text-center text-slate-500">
+                  <i class="fa-solid fa-spinner fa-spin mr-2"></i> Loading live services...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-slate-800/80 glass-panel py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        <span>ApexSMM Engine v2.0 &bull; Automated Social Media Growth</span>
+      </div>
+      <div>
+        <span>&copy; 2026 ApexSMM. All rights reserved. 24/7 Automated Delivery</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal (Login / Register) -->
+  <div id="authModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-md rounded-3xl p-8 border border-slate-700/80 shadow-2xl relative">
+      <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Modal Tabs -->
+      <div class="flex rounded-xl bg-slate-900/80 p-1 mb-6 border border-slate-800">
+        <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-2 rounded-lg text-sm font-bold text-white bg-indigo-600 transition-all">Sign In</button>
+        <button id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-2 rounded-lg text-sm font-semibold text-slate-400 hover:text-white transition-all">Create Account</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase mb-1.5">Username or Email</label>
+          <div class="relative">
+            <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+            <input type="text" id="loginUsername" required placeholder="Enter username" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase mb-1.5">Password</label>
+          <div class="relative">
+            <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+            <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-600/30 transition-all">
+          Sign In to Dashboard
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4 hidden">
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase mb-1.5">Username</label>
+          <div class="relative">
+            <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+            <input type="text" id="regUsername" required placeholder="Choose a username" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase mb-1.5">Email Address</label>
+          <div class="relative">
+            <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+            <input type="email" id="regEmail" required placeholder="you@domain.com" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase mb-1.5">Password</label>
+          <div class="relative">
+            <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+            <input type="password" id="regPassword" required placeholder="At least 6 characters" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700/80 text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-600/30 transition-all">
+          Create Account
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(()=>{});
+    }
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    function installApexApp() {
+      Swal.fire({
+        title: '📲 ApexSMM Android App (APK)',
+        html: `
+          <div class="text-left text-sm text-slate-300 space-y-3">
+            <p class="text-slate-200">Aap do tareeqon se ApexSMM mobile app hasil kar sakte hain:</p>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-700 space-y-2">
+              <div class="font-bold text-emerald-400 flex items-center gap-2">
+                <i class="fa-solid fa-download"></i> Tareeqa 1: Direct APK File Download
+              </div>
+              <p class="text-xs text-slate-400">Direct Android APK file download karein aur apne mobile par install karein ya doston ko WhatsApp par bhejein.</p>
+              <a href="/ApexSMM.apk" download="ApexSMM.apk" class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all shadow-md shadow-emerald-600/30">
+                <i class="fa-solid fa-file-arrow-down"></i> Download ApexSMM.apk (1 MB)
+              </a>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-700 space-y-1">
+              <div class="font-bold text-indigo-400 flex items-center gap-2">
+                <i class="fa-solid fa-mobile-screen-button"></i> Tareeqa 2: Instant 1-Click Install
+              </div>
+              <p class="text-xs text-slate-400">Mobile Chrome ke menu (3 dots ⋮) par click karein aur <b>"Install App"</b> ya <b>"Add to Home Screen"</b> par tap karein.</p>
+            </div>
+          </div>
+        `,
+        showCancelButton: true,
+        cancelButtonText: 'Band Karein',
+        cancelButtonColor: '#334155',
+        showConfirmButton: deferredPrompt ? true : false,
+        confirmButtonText: '⚡ Instant 1-Click Install',
+        confirmButtonColor: '#4f46e5',
+        background: '#0f172a',
+        color: '#f8fafc'
+      }).then((result) => {
+        if (result.isConfirmed && deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(() => {
+            deferredPrompt = null;
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
