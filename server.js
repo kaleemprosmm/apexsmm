@@ -590,3 +590,5 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 ApexSMM Panel is running live on: http://localhost:${PORT}`);
   console.log(`=======================================================`);
 });
+
+module.exports = app;
